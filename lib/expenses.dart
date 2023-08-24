@@ -29,9 +29,9 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-      // context here is meta data (called context) about expenses widget
+      // context here is a meta data (called context) about expenses widget
       context: context,
-      // ctx is context of this shwModalBottomSheet, ctx is name we are using for it to avoid conflicts with variable context.
+      // ctx is context of this showModalBottomSheet, ctx is name we are using for it to avoid conflicts with variable context.
       builder: (ctx) => const NewExpense(),
     );
   }
