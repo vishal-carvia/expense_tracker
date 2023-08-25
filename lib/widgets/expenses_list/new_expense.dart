@@ -6,7 +6,6 @@ class NewExpense extends StatefulWidget {
   final Function(Expense expense) onAddExpense;
 
   @override
-  // ignore: no_logic_in_create_state
   State<NewExpense> createState() {
     return _NewExpenseState();
   }
