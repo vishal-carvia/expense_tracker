@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:expense_tracker/widgets/others/amount.dart';
+import 'package:expense_tracker/widgets/others/dropdown.dart';
+import 'package:expense_tracker/widgets/others/title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
@@ -96,6 +99,12 @@ class _NewExpenseState extends State<NewExpense> {
     }
   }
 
+  void updateSelectedCategory(Category value) {
+    setState(() {
+      _selectedCategory = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // this calculates amount of space taken by ui from bottom. Keyboard in our case. It pushes content up little bit from keyboard.
@@ -121,37 +130,22 @@ class _NewExpenseState extends State<NewExpense> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: TextField(
+                          child: TitleField(
                             controller: _titleController,
-                            maxLength: 50,
-                            decoration: const InputDecoration(
-                              label: Text('Title'),
-                            ),
                           ),
                         ),
                         const SizedBox(
                           width: 24,
                         ),
                         Expanded(
-                          child: TextField(
-                            controller: _amountController,
-                            keyboardType: TextInputType.number,
-                            maxLength: 50,
-                            decoration: const InputDecoration(
-                              prefixText: '\$',
-                              label: Text('Amount'),
-                            ),
-                          ),
-                        ),
+                            child: AmountField(
+                          controller: _amountController,
+                        )),
                       ],
                     )
                   else
-                    TextField(
+                    TitleField(
                       controller: _titleController,
-                      maxLength: 50,
-                      decoration: const InputDecoration(
-                        label: Text('Title'),
-                      ),
                     ),
                   if (width >= 600)
                     Row(
@@ -197,16 +191,7 @@ class _NewExpenseState extends State<NewExpense> {
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            controller: _amountController,
-                            keyboardType: TextInputType.number,
-                            maxLength: 50,
-                            decoration: const InputDecoration(
-                              prefixText: '\$',
-                              label: Text('Amount'),
-                            ),
-                          ),
-                        ),
+                            child: AmountField(controller: _amountController)),
                         const SizedBox(width: 16),
                         Expanded(
                           child: Row(
@@ -246,26 +231,8 @@ class _NewExpenseState extends State<NewExpense> {
                   else
                     Row(
                       children: [
-                        DropdownButton(
-                            value: _selectedCategory,
-                            items: Category.values
-                                .map(
-                                  (category) => DropdownMenuItem(
-                                    value: category,
-                                    child: Text(
-                                      category.name.toUpperCase(),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (value) {
-                              if (value == null) {
-                                return;
-                              }
-                              setState(() {
-                                _selectedCategory = value;
-                              });
-                            }),
+                        DropdownButtonCustom(
+                            updateSelectedCategory: updateSelectedCategory),
                         const Spacer(),
                         TextButton(
                           onPressed: () {
