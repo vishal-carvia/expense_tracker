@@ -150,26 +150,8 @@ class _NewExpenseState extends State<NewExpense> {
                   if (width >= 600)
                     Row(
                       children: [
-                        DropdownButton(
-                            value: _selectedCategory,
-                            items: Category.values
-                                .map(
-                                  (category) => DropdownMenuItem(
-                                    value: category,
-                                    child: Text(
-                                      category.name.toUpperCase(),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (value) {
-                              if (value == null) {
-                                return;
-                              }
-                              setState(() {
-                                _selectedCategory = value;
-                              });
-                            }),
+                        DropdownButtonCustom(
+                            updateSelectedCategory: updateSelectedCategory),
                         const SizedBox(width: 24),
                         Expanded(
                           child: Row(
