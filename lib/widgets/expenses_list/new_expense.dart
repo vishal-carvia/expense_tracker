@@ -98,7 +98,7 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    // this calculates amount of space taken by ui from bottom. Keyboard in our case.
+    // this calculates amount of space taken by ui from bottom. Keyboard in our case. It pushes content up little bit from keyboard.
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     return LayoutBuilder(
